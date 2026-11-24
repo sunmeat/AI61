@@ -1,0 +1,121 @@
+{
+  "modelId": "Xenova/nllb-200-distilled-600M",
+  "revision": "261c31d1a5732c67cdd16d80e8d6088507c7ccea",
+  "reference": {
+    "space": "Xenova/react-translator",
+    "revision": "fd1f3d6685aaa373773dbb6b2d001e76df67c7ee",
+    "url": "https://huggingface.co/spaces/Xenova/react-translator/tree/fd1f3d6685aaa373773dbb6b2d001e76df67c7ee"
+  },
+  "modelCard": {
+    "url": "https://huggingface.co/Xenova/nllb-200-distilled-600M/tree/261c31d1a5732c67cdd16d80e8d6088507c7ccea",
+    "license": "cc-by-nc-4.0 (non-commercial use only)"
+  },
+  "modelLicense": "cc-by-nc-4.0 (upstream model card; non-commercial use only)",
+  "runtimeLicenses": {
+    "transformersJs": "Apache-2.0",
+    "onnxruntimeWeb": "MIT"
+  },
+  "runtime": {
+    "name": "@huggingface/transformers",
+    "version": "3.7.2",
+    "onnxruntimeWeb": "1.22.0-dev.20250409-89f8206ba4",
+    "device": "wasm-cpu",
+    "numThreads": 1,
+    "dtype": "q8",
+    "worker": "/translator.worker.js",
+    "workerContentType": "text/javascript",
+    "wasm": [
+      {
+        "name": "ort-wasm-simd-threaded.wasm",
+        "path": "/wasm/ort-wasm-simd-threaded.wasm",
+        "bytes": 11133407,
+        "contentType": "application/wasm",
+        "required": true,
+        "status": "same-origin"
+      }
+    ]
+  },
+  "resources": [
+    {
+      "kind": "worker",
+      "path": "/translator.worker.js",
+      "bytes": 858057,
+      "required": true,
+      "source": "same-origin",
+      "status": "built"
+    },
+    {
+      "kind": "runtime-wasm",
+      "path": "/wasm/ort-wasm-simd-threaded.wasm",
+      "bytes": 11133407,
+      "contentType": "application/wasm",
+      "required": true,
+      "status": "same-origin"
+    },
+    {
+      "kind": "tokenizer-config",
+      "modelId": "Xenova/nllb-200-distilled-600M",
+      "revision": "261c31d1a5732c67cdd16d80e8d6088507c7ccea",
+      "path": "config.json",
+      "url": "https://huggingface.co/Xenova/nllb-200-distilled-600M/resolve/261c31d1a5732c67cdd16d80e8d6088507c7ccea/config.json",
+      "bytes": 873,
+      "required": true,
+      "dtype": "q8",
+      "source": "huggingface-cors",
+      "contentType": "application/json-or-model",
+      "status": "pending"
+    },
+    {
+      "kind": "tokenizer-config",
+      "modelId": "Xenova/nllb-200-distilled-600M",
+      "revision": "261c31d1a5732c67cdd16d80e8d6088507c7ccea",
+      "path": "tokenizer.json",
+      "url": "https://huggingface.co/Xenova/nllb-200-distilled-600M/resolve/261c31d1a5732c67cdd16d80e8d6088507c7ccea/tokenizer.json",
+      "bytes": 17331224,
+      "required": true,
+      "dtype": "q8",
+      "source": "huggingface-cors",
+      "contentType": "application/json-or-model",
+      "status": "pending"
+    },
+    {
+      "kind": "tokenizer-config",
+      "modelId": "Xenova/nllb-200-distilled-600M",
+      "revision": "261c31d1a5732c67cdd16d80e8d6088507c7ccea",
+      "path": "tokenizer_config.json",
+      "url": "https://huggingface.co/Xenova/nllb-200-distilled-600M/resolve/261c31d1a5732c67cdd16d80e8d6088507c7ccea/tokenizer_config.json",
+      "bytes": 544,
+      "required": true,
+      "dtype": "q8",
+      "source": "huggingface-cors",
+      "contentType": "application/json-or-model",
+      "status": "pending"
+    },
+    {
+      "kind": "model-weight",
+      "modelId": "Xenova/nllb-200-distilled-600M",
+      "revision": "261c31d1a5732c67cdd16d80e8d6088507c7ccea",
+      "path": "onnx/encoder_model_quantized.onnx",
+      "url": "https://huggingface.co/Xenova/nllb-200-distilled-600M/resolve/261c31d1a5732c67cdd16d80e8d6088507c7ccea/onnx/encoder_model_quantized.onnx",
+      "bytes": 419120483,
+      "required": true,
+      "dtype": "q8",
+      "source": "huggingface-cors",
+      "contentType": "application/octet-stream",
+      "status": "pending"
+    },
+    {
+      "kind": "model-weight",
+      "modelId": "Xenova/nllb-200-distilled-600M",
+      "revision": "261c31d1a5732c67cdd16d80e8d6088507c7ccea",
+      "path": "onnx/decoder_model_merged_quantized.onnx",
+      "url": "https://huggingface.co/Xenova/nllb-200-distilled-600M/resolve/261c31d1a5732c67cdd16d80e8d6088507c7ccea/onnx/decoder_model_merged_quantized.onnx",
+      "bytes": 475505771,
+      "required": true,
+      "dtype": "q8",
+      "source": "huggingface-cors",
+      "contentType": "application/octet-stream",
+      "status": "pending"
+    }
+  ]
+}
