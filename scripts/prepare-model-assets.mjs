@@ -94,13 +94,18 @@ for (const [resourcePath, bytes] of Object.entries(expected)) {
   const url = `${modelBase}${resourcePath}`
   const response = await fetch(url, { headers: { Range: 'bytes=0-0' }, redirect: 'follow' })
   if (!(response.ok || response.status === 206)) fail(`Pinned resource probe failed for ${resourcePath}: HTTP ${response.status} (${url})`)
-  const contentType = response.headers.get('content-type') ?? ''
+  const contentType = (response.headers.get('content-type') ?? '').toLowerCase()
   if (contentType.includes('text/html')) fail(`Pinned resource returned HTML instead of model data: ${resourcePath}`)
-  if (response.status === 206) {
+  if (resourcePath.endsWith('.onnx')) {
+    if (response.status !== 206) fail(`ONNX Range probe must return HTTP 206 (got ${response.status}) for ${resourcePath}; refusing a full-weight response.`)
+    if (!contentType.includes('application/octet-stream') || contentType.includes('json')) fail(`ONNX resource returned unexpected MIME ${contentType || '(missing)'} for ${resourcePath}; expected application/octet-stream.`)
     const range = response.headers.get('content-range')
     if (!range || !range.endsWith(`/${bytes}`)) fail(`Range size mismatch for ${resourcePath}: expected ${bytes}, Content-Range=${range ?? 'missing'}`)
+    const sample = new Uint8Array(await response.arrayBuffer())
+    if (sample.byteLength !== 1) fail(`ONNX Range probe must read exactly 1 byte for ${resourcePath}, got ${sample.byteLength}.`)
+  } else {
+    await response.body?.cancel()
   }
-  await response.body?.cancel()
 }
 
 console.log(`[prepare-model-assets] Ready: Transformers.js ${runtimePkg.version}, ONNX Runtime ${ortPkg.version}, ${runtimeAssets.length} same-origin WASM file(s), ${modelFiles.length} pinned model resources, worker ${workerStat.size} bytes.`)
