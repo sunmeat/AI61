@@ -1,4 +1,4 @@
-import { mkdir, readFile, readdir, stat, writeFile, copyFile, realpath, unlink } from 'node:fs/promises'
+import { mkdir, readFile, stat, writeFile, copyFile, realpath } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { build } from 'esbuild'
@@ -40,19 +40,23 @@ for (const [resourcePath, size] of Object.entries(expected)) {
 }
 
 const wasmSource = path.join(ortDir, 'dist')
-const wasmFiles = (await readdir(wasmSource)).filter((name) => name === 'ort-wasm-simd-threaded.wasm')
-if (!wasmFiles.length) fail(`No ONNX Runtime WASM assets found in ${wasmSource}`)
 const wasmTarget = path.join(root, 'public/wasm')
+const runtimeFiles = [
+  { name: 'ort-wasm-simd-threaded.mjs', contentType: 'text/javascript; charset=utf-8' },
+  { name: 'ort-wasm-simd-threaded.jsep.mjs', contentType: 'text/javascript; charset=utf-8' },
+  { name: 'ort-wasm-simd-threaded.wasm', contentType: 'application/wasm' },
+  { name: 'ort-wasm-simd-threaded.jsep.wasm', contentType: 'application/wasm' },
+]
 await mkdir(wasmTarget, { recursive: true })
-await unlink(path.join(wasmTarget, 'ort-wasm-simd-threaded.jsep.wasm')).catch(() => {})
 const runtimeAssets = []
-for (const name of wasmFiles) {
+for (const { name, contentType } of runtimeFiles) {
   const from = path.join(wasmSource, name)
   const to = path.join(wasmTarget, name)
+  await stat(from).catch(() => fail(`Required ONNX Runtime ${ortPkg.version} asset is missing: ${name}`))
   await copyFile(from, to)
   const { size } = await stat(to)
   if (!size) fail(`Copied runtime asset is empty: ${name}`)
-  runtimeAssets.push({ name, path: `/wasm/${name}`, bytes: size, contentType: 'application/wasm', required: true, status: 'same-origin' })
+  runtimeAssets.push({ name, path: `/wasm/${name}`, bytes: size, contentType, required: true, status: 'same-origin' })
 }
 
 const workerOut = path.join(root, 'public/translator.worker.js')

@@ -26,9 +26,33 @@
     "workerContentType": "text/javascript",
     "wasm": [
       {
+        "name": "ort-wasm-simd-threaded.mjs",
+        "path": "/wasm/ort-wasm-simd-threaded.mjs",
+        "bytes": 20856,
+        "contentType": "text/javascript; charset=utf-8",
+        "required": true,
+        "status": "same-origin"
+      },
+      {
+        "name": "ort-wasm-simd-threaded.jsep.mjs",
+        "path": "/wasm/ort-wasm-simd-threaded.jsep.mjs",
+        "bytes": 44484,
+        "contentType": "text/javascript; charset=utf-8",
+        "required": true,
+        "status": "same-origin"
+      },
+      {
         "name": "ort-wasm-simd-threaded.wasm",
         "path": "/wasm/ort-wasm-simd-threaded.wasm",
         "bytes": 11133407,
+        "contentType": "application/wasm",
+        "required": true,
+        "status": "same-origin"
+      },
+      {
+        "name": "ort-wasm-simd-threaded.jsep.wasm",
+        "path": "/wasm/ort-wasm-simd-threaded.jsep.wasm",
+        "bytes": 21596019,
         "contentType": "application/wasm",
         "required": true,
         "status": "same-origin"
@@ -46,8 +70,32 @@
     },
     {
       "kind": "runtime-wasm",
+      "path": "/wasm/ort-wasm-simd-threaded.mjs",
+      "bytes": 20856,
+      "contentType": "text/javascript; charset=utf-8",
+      "required": true,
+      "status": "same-origin"
+    },
+    {
+      "kind": "runtime-wasm",
+      "path": "/wasm/ort-wasm-simd-threaded.jsep.mjs",
+      "bytes": 44484,
+      "contentType": "text/javascript; charset=utf-8",
+      "required": true,
+      "status": "same-origin"
+    },
+    {
+      "kind": "runtime-wasm",
       "path": "/wasm/ort-wasm-simd-threaded.wasm",
       "bytes": 11133407,
+      "contentType": "application/wasm",
+      "required": true,
+      "status": "same-origin"
+    },
+    {
+      "kind": "runtime-wasm",
+      "path": "/wasm/ort-wasm-simd-threaded.jsep.wasm",
+      "bytes": 21596019,
       "contentType": "application/wasm",
       "required": true,
       "status": "same-origin"
